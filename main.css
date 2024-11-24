@@ -1,0 +1,15 @@
+html, body {
+    margin: 0;
+}
+
+body {
+    font-family: sans-serif;
+}
+
+div {
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: white;
+    font-family: "Arial Narrow", sans-serif;
+}
