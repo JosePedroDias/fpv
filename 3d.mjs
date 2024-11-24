@@ -3,10 +3,11 @@ import * as THREE from 'https://threejs.org/build/three.module.js';
 const W = window.innerWidth;
 const H = window.innerHeight;
 
-const LAYOUT_SPLIT      = 1; // (fpv | stationary)
-const LAYOUT_FPV        = 2; // (fpv)
-const LAYOUT_STATIONARY = 3; // (stationary)
-const LAYOUT_PIP        = 4; // (fpv, w/ stationary in PIP)
+export const LAYOUT_SPLIT      = 1; // (fpv | stationary)
+export const LAYOUT_FPV        = 2; // (fpv)
+export const LAYOUT_STATIONARY = 3; // (stationary)
+export const LAYOUT_PIP        = 4; // (fpv, w/ stationary in PIP)
+
 let layout = LAYOUT_PIP;
 
 // COLORS
@@ -123,7 +124,7 @@ scene.add(droneMesh);
 const chaseCam      = new THREE.PerspectiveCamera(CHASE_CAM_FOV,      W / H, 0.1, 1000);
 const stationaryCam = new THREE.PerspectiveCamera(STATIONARY_CAM_FOV, W / H, 0.1, 1000);
 
-function setLayout(l) {
+export function setLayout(l) {
     layout = l;
     chaseCam.aspect      = (l === LAYOUT_SPLIT ? 0.5 : 1) * W / H;
     stationaryCam.aspect = (l === LAYOUT_SPLIT ? 0.5 : 1) * W / H;
@@ -269,47 +270,11 @@ function onTick() {
         renderer.setViewport(0, 0, W, H); // 1st/left (chase)
         renderer.render(scene, chaseCam);
         renderer.setViewport(0, 0, W / 4, H / 4); // 2nd/right (stationary)
-        //renderer.clearColor();
-        renderer.clearDepth();
+        renderer.setScissor(0, 0, W / 4, H / 4);
+        renderer.setScissorTest(true);
+        renderer.clear();
         renderer.render(scene, stationaryCam);
+        renderer.setScissorTest(false);
     }
 }
 onTick();
-
-window.addEventListener('keydown', (ev) => {
-    switch (ev.key) {
-        case '1': setLayout(LAYOUT_SPLIT); break;
-        case '2': setLayout(LAYOUT_FPV); break;
-        case '3': setLayout(LAYOUT_STATIONARY); break;
-        case '4': setLayout(LAYOUT_PIP); break;
-        default: return;
-
-        /*case 's': // Decrease throttle
-            setThrottle(-0.1);
-            break;
-        case 'a': // Yaw left
-            setYaw(-5);
-            break;
-        case 'd': // Yaw right
-            setYaw(5);
-            break;
-        case 'ArrowLeft': // Roll left
-        //case 'q': // Roll left
-            setRoll(-5);
-            break;
-            case 'ArrowRight': // Roll right
-        //case 'e': // Roll right
-            setRoll(5);
-            break;
-        case 'ArrowUp': // Pitch forward
-            setPitch(-5);
-            break;
-        case 'ArrowDown': // Pitch backward
-            setPitch(5);
-            break;
-        default:
-            return;*/
-    }
-    ev.preventDefault();
-    ev.stopPropagation();
-});

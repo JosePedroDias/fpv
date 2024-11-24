@@ -4,9 +4,10 @@
 
 Trying to come up with the simplest FPV simulation possible.
 
-- gets inputs from radio controller via USB using the gamepad API (currently hardcoded to literadio 3)
+- gets inputs from radio controller via USB using the gamepad API
 - uses threejs to display the points of view of the drone and an external cam
-- 1, 2, 3, 4 to change camera layouts
+- multiple camera layouts
+- everything's editable! physics, bindings, maps, etc.
 
 
 ## how to run
@@ -16,22 +17,17 @@ Trying to come up with the simplest FPV simulation possible.
 visit http://localhost:8080
 
 
-## input
+## supported inputs
 
-### example - betafpv lite radio 3
+edit `main.mjs` to change these:
+- lite ratio 3 bindings
+- keyboard bindings: wasd/keys for throttle/y/p/r
+- camera layouts:
+    - 1 split
+    - 2 fpv
+    - 3 stationary
+    - 4 fpv with stationary pip
 
-- https://betafpv.com/products/literadio-3-radio-transmitter?srsltid=AfmBOooos2bI_7Px6MxRTXDtVoBv5i0wPO_CTO_5HKnlrFVtpaA8hEJv
-- https://oscarliang.com/learn-flying-fpv-multirotors/
-
-```
-THROTTLE  (left  / yaw  / throttle)   x: #0 (-1, +1), y: #5 (-1, +1)
-DIRECTION (right / roll / pitch)      x: #3 (-1, +1), y: #4 (-1, +1)
-
-SB(L)  #2 (-1, 0, +1)
-SC(R)  #6 (-1,    +1)
-SA(ZL) #1 (-1,    +1)
-SD(ZR) ????
-```
 
 ## 3D
 
@@ -41,4 +37,9 @@ SD(ZR) ????
 
 ## TODO
 
-- ...
+- support abstract 3d drone rendering (better than a cube)
+- support 3d model backed drone rendering (easy, just need to create it)
+- easily define drone specs and expo config etc.
+- load a level via 3d model (easy, model and export from blender...)
+- collision detection
+- sound?

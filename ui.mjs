@@ -1,37 +1,13 @@
-const N = 7;
-const AXIS_NAMES = [
-    'yaw', // 0
-    'SA', // 1
-    'SB', // 2
-    'roll', // 3
-    'pitch', // 4
-    'throttle', // 5
-    'SC', // 6
-];
-
 export class UI {
     constructor(parentEl = document.body) {
         const el = document.createElement('div');
-        el.appendChild(document.createTextNode('TODO'));
+        el.appendChild(document.createTextNode(' '));
         parentEl.appendChild(el);
         this.el = el;
-
-        const o = new Array(N);
-        o.fill(0);
-        this.o = o;
     }
 
-    set(idx, value) {
-        this.o[idx] = value;
-    }
-
-    update() {
-        if (!this.o) return;
-        const arr = [5, 0, 4, 3].map((i) => [this.o[i], AXIS_NAMES[i]]);
-        const s = arr.map(([v, name]) => {
-            const V = `${v < 0 ? '' : '+'}${v.toFixed(2)}`;
-            return `${name}: ${V}`;
-        }).join(' | ');
+    update(st) {
+        const s = `throttle: ${st.throttle.toFixed(2)} | yaw: ${st.dYaw.toFixed(2)} | pitch: ${st.dPitch.toFixed(2)} | roll: ${st.dRoll.toFixed(2)}`;
         this.el.childNodes[0].nodeValue = s;
     }
 }
