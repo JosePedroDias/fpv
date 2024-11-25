@@ -21,7 +21,7 @@ visit http://localhost:8080
 
 edit `main.mjs` to change these:
 - lite ratio 3 bindings
-- keyboard bindings: wasd/keys for throttle/y/p/r
+- keyboard bindings: wasd/arrow keys for throttle/yaw pitch/roll
 - camera layouts:
     - 1 split
     - 2 fpv
