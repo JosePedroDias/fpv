@@ -18,7 +18,9 @@ const K_4 = '4';
 
 const ui = new UI();
 
-setupGamepad();
+navigator.getGamepads();
+console.warn('click to start capturing gamepad events...');
+document.body.addEventListener('click', setupGamepad, { once: true });
 
 addKeys([
     K_1, K_2, K_3, K_4,

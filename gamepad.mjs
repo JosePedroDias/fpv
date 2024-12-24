@@ -37,7 +37,10 @@ function readGamepad() {
 }
 
 export function setupGamepad() {
-    if (!navigator.getGamepads()[0]) return false;
+    if (!navigator.getGamepads()[0]) {
+        console.warn('no gamepad found');
+        return false;
+    }
 
     const onTick = () => {
         requestAnimationFrame(onTick);
